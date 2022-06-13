@@ -33,12 +33,30 @@ const Dashboard = () => {
         <div class="drawer-side">
           <label for="my-drawer-2" class="drawer-overlay "></label>
           <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-            <img
-              class="rounded-full mb-10"
-              style={{ width: "120px", height: "120px" }}
-              src="https://cineplex-ticket-admin.cineplexbd.com/uploads/user/user.png"
-              alt=""
-            />
+            {user.photoURL ? (
+              <img
+                class="rounded-full mb-10"
+                style={{ width: "120px", height: "120px" }}
+                src={user?.photoURL}
+                alt=""
+              />
+            ) : (
+              <img
+                class="rounded-full mb-10"
+                style={{ width: "120px", height: "120px" }}
+                src="https://cineplex-ticket-admin.cineplexbd.com/uploads/user/user.png"
+                alt=""
+              />
+            )}
+
+            <>
+              <button>
+                <Link to="edit-profile" className="btn btn-xs mr-36">
+                  <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
+                  <span className="px-2">Edit Profile</span>
+                </Link>
+              </button>
+            </>
             <h1 class="text-purple-800 font-bold my-2">
               Hi, {user?.displayName}
             </h1>
@@ -49,13 +67,13 @@ const Dashboard = () => {
                 <FontAwesomeIcon icon={faUser}></FontAwesomeIcon> Profile
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <Link to="edit-profile">
                 {" "}
                 <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>Edit
                 Profile
               </Link>
-            </li>
+            </li> */}
             {admin && (
               <li>
                 <Link to="user">

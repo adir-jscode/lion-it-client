@@ -20,7 +20,7 @@ const Header = () => {
       </li>
       {user ? (
         <li>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/dashboard/profile">Dashboard</NavLink>
         </li>
       ) : (
         <li>
@@ -67,7 +67,11 @@ const Header = () => {
           <div class=" navbar navbar-end dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle avatar">
               <div class="w-10 rounded-full">
-                <img src="https://api.lorem.space/image/face?hash=33791" />
+                {user.photoURL ? (
+                  <img src={user.photoURL} />
+                ) : (
+                  <img src="https://api.lorem.space/image/face?hash=33791" />
+                )}
               </div>
             </label>
             <ul
