@@ -24,11 +24,11 @@ const LoginModal = ({ setOpenModal }) => {
   // if (token) {
   //   navigate("/home");
   // }
-  // useEffect(() => {
-  //   if (token) {
-  //     navigate(from, { replace: true });
-  //   }
-  // }, [token, from, navigate]);
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, from, navigate]);
 
   if (loading) {
     return <Loading></Loading>;

@@ -6,7 +6,7 @@ const Banner = () => {
       <div class="hero min-h-screen bg-base-100">
         <div class="hero-content sm:max-w-10 flex-col lg:flex-row-reverse">
           <img
-            src="https://quiety.themetags.com/assets/img/feature-hero-img.svg"
+            src="https://aviola.netlify.app/img/core-img/banner.png"
             class="lg:max-w-lg rounded-lg bg-base-100"
           />
           <div>

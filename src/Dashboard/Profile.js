@@ -33,6 +33,7 @@ const Profile = () => {
           <input
             type="text"
             defaultValue="Add your phone number"
+            disabled
             placeholder="Type here"
             class="input input-bordered w-full max-w-lg"
           />

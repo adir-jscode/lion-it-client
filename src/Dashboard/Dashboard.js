@@ -1,5 +1,6 @@
 import {
   faCartShopping,
+  faDiagramProject,
   faMessage,
   faPenToSquare,
   faRightFromBracket,
@@ -83,13 +84,22 @@ const Dashboard = () => {
               </li>
             )}
             {admin && (
-              <li>
-                <Link to="add-service">
-                  {" "}
-                  <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>Add New
-                  Service{" "}
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link to="add-service">
+                    {" "}
+                    <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>Add New
+                    Service{" "}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="manage-service">
+                    {" "}
+                    <FontAwesomeIcon icon={faDiagramProject}></FontAwesomeIcon>
+                    Manage Service{" "}
+                  </Link>
+                </li>
+              </>
             )}
 
             <li>

@@ -24,11 +24,11 @@ const Login = () => {
   // if (token) {
   //   navigate("/home");
   // }
-  // useEffect(() => {
-  //   if (token) {
-  //     navigate(from, { replace: true });
-  //   }
-  // }, [token, from, navigate]);
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, from, navigate]);
   return (
     <section>
       <div class="text-center my-40  w-3/6 mx-auto">

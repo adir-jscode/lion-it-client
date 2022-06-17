@@ -14,6 +14,7 @@ import RequireAuth from "./Login/RequireAuth";
 import User from "./Dashboard/User";
 import RequireAdmin from "./Login/RequireAdmin";
 import AddService from "./Dashboard/AddService";
+import ManageService from "./Dashboard/ManageService";
 function App() {
   return (
     <div class="mx-12">
@@ -51,6 +52,15 @@ function App() {
             element={
               <RequireAdmin>
                 <AddService></AddService>
+              </RequireAdmin>
+            }
+            Route
+          />
+          <Route
+            path="manage-service"
+            element={
+              <RequireAdmin>
+                <ManageService></ManageService>
               </RequireAdmin>
             }
             Route
