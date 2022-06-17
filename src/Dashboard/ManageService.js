@@ -1,15 +1,36 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import DeleteModal from "./DeleteModal";
 import UpdateService from "./UpdateService";
 
 const ManageService = () => {
   const [manageService, setManageService] = useState([]);
   const [update, setUpdate] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetch("http://localhost:5000/service").then((response) =>
       response.json().then((data) => setManageService(data))
     );
-  }, []);
+  }, [loading]);
+
+  const handleDelete = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/service/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          toast.success("Deleted Successfully");
+          setModalDelete(false);
+          setLoading(!loading);
+        }
+      });
+  };
   return (
     <div>
       <h1>Total service : {manageService.length}</h1>
@@ -42,16 +63,24 @@ const ManageService = () => {
                 <td>{manage.name}</td>
                 <td>{manage.price}</td>
                 <td>
-                  <label
-                    for="my-modal"
-                    onClick={() => setUpdate(manage)}
-                    class="btn modal-button btn-primary"
-                  >
-                    Update
-                  </label>
+                  <Link to={`/update-service/${manage._id}`}>
+                    <label
+                      for="my-modal"
+                      onClick={() => setUpdate(manage)}
+                      class="btn modal-button btn-primary"
+                    >
+                      Update
+                    </label>
+                  </Link>
                 </td>
                 <td>
-                  <button class="btn btn-error">X</button>
+                  <label
+                    onClick={() => setModalDelete(manage)}
+                    for="my-modal-6"
+                    class="btn modal-button btn-error"
+                  >
+                    X
+                  </label>
                 </td>
               </tr>
             ))}
@@ -59,6 +88,14 @@ const ManageService = () => {
         </table>
         {update && (
           <UpdateService manageService={manageService}></UpdateService>
+        )}
+        {modalDelete && (
+          <DeleteModal
+            modalDelete={modalDelete}
+            handleDelete={handleDelete}
+            setLoading={setLoading}
+            loading={loading}
+          ></DeleteModal>
         )}
       </div>
     </div>

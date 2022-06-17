@@ -4,12 +4,14 @@ import Banner from "./Banner";
 import Newsletter from "./Newsletter";
 import OurPartners from "./OurPartners";
 import Review from "./Review";
+import Services from "./Services";
 
 const Home = () => {
   return (
     <div>
       <Banner></Banner>
       <OurPartners></OurPartners>
+      <Services></Services>
       <Newsletter></Newsletter>
       <Review></Review>
     </div>

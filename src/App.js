@@ -15,6 +15,8 @@ import User from "./Dashboard/User";
 import RequireAdmin from "./Login/RequireAdmin";
 import AddService from "./Dashboard/AddService";
 import ManageService from "./Dashboard/ManageService";
+import ServiceDetails from "./Home/ServiceDetails";
+import UpdateService from "./Dashboard/UpdateService";
 function App() {
   return (
     <div class="mx-12">
@@ -22,6 +24,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
+        <Route
+          path="/book/:id"
+          element={<ServiceDetails></ServiceDetails>}
+        ></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route
@@ -61,6 +67,15 @@ function App() {
             element={
               <RequireAdmin>
                 <ManageService></ManageService>
+              </RequireAdmin>
+            }
+            Route
+          />
+          <Route
+            path="update-service/:id"
+            element={
+              <RequireAdmin>
+                <UpdateService></UpdateService>
               </RequireAdmin>
             }
             Route
