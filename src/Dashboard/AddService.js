@@ -47,7 +47,7 @@ const AddService = () => {
       });
   };
   return (
-    <div className="w-full h-screen text-center flex">
+    <div className="w-full max-w-full my-36 shadow-2xl bg-base-100 max-h-screen text-center flex mx-auto py-6 px-14">
       <form action="" onSubmit={handleSubmit(onSubmit)}>
         <div class="form-control w-full max-w-lg ">
           <label class="label">

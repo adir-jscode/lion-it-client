@@ -33,7 +33,10 @@ const ManageService = () => {
   };
   return (
     <div>
-      <h1>Total service : {manageService.length}</h1>
+      <h1 className="text-3xl font-bold my-5">
+        {" "}
+        Our Total service : {manageService.length}
+      </h1>
       <div class="overflow-x-auto">
         <table class="table w-full">
           <thead>
