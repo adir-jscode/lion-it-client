@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../Shared/Loading";
 import { useForm } from "react-hook-form";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -128,6 +128,11 @@ const ServiceDetails = () => {
             </form>
           </div>
         </div>
+      </div>
+      <div class="w-11/12 flex justify-center">
+        <button class=" btn btn-wide btn-secondary text-black font-bold my-10">
+          <Link to="/dashboard/my-order">Go To Checkout</Link>
+        </button>
       </div>
     </div>
   );

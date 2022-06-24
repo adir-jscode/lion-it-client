@@ -18,6 +18,8 @@ import ManageService from "./Dashboard/ManageService";
 import ServiceDetails from "./Home/ServiceDetails";
 import UpdateService from "./Dashboard/UpdateService";
 import Order from "./Dashboard/Order";
+import ManageOrders from "./Dashboard/ManageOrders";
+import RequireUser from "./Login/RequireUser";
 function App() {
   return (
     <div class="mx-12">
@@ -29,7 +31,9 @@ function App() {
           path="/service/:id"
           element={
             <RequireAuth>
-              <ServiceDetails></ServiceDetails>
+              <RequireUser>
+                <ServiceDetails></ServiceDetails>
+              </RequireUser>
             </RequireAuth>
           }
         ></Route>
@@ -76,7 +80,24 @@ function App() {
             }
             Route
           />
-          <Route path="my-order" element={<Order></Order>} Route />
+          <Route
+            path="manage-order"
+            element={
+              <RequireAdmin>
+                <ManageOrders></ManageOrders>
+              </RequireAdmin>
+            }
+            Route
+          />
+          <Route
+            path="my-order"
+            element={
+              <RequireUser>
+                <Order></Order>
+              </RequireUser>
+            }
+            Route
+          />
           <Route
             path="update-service/:id"
             element={

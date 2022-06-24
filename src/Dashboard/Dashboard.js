@@ -99,6 +99,13 @@ const Dashboard = () => {
                     Manage Service{" "}
                   </Link>
                 </li>
+                <li>
+                  <Link to="manage-order">
+                    {" "}
+                    <FontAwesomeIcon icon={faCartShopping}></FontAwesomeIcon>
+                    Manage orders{" "}
+                  </Link>
+                </li>
               </>
             )}
 
