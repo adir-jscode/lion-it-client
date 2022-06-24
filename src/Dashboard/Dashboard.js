@@ -102,12 +102,17 @@ const Dashboard = () => {
               </>
             )}
 
-            <li>
-              <Link to="">
-                {" "}
-                <FontAwesomeIcon icon={faCartShopping}></FontAwesomeIcon>Order
-              </Link>
-            </li>
+            {!admin && (
+              <>
+                <li>
+                  <Link to="my-order">
+                    {" "}
+                    <FontAwesomeIcon icon={faCartShopping}></FontAwesomeIcon>
+                    Order
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
               <Link to="">
                 {" "}

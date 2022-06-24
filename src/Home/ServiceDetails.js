@@ -5,6 +5,7 @@ import Loading from "../Shared/Loading";
 import { useForm } from "react-hook-form";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
+import { toast } from "react-toastify";
 
 const ServiceDetails = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -27,28 +28,34 @@ const ServiceDetails = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      serviceName: service.name,
+      price: service.price,
+    };
+    console.log(userInfo);
+    fetch("http://localhost:5000/booked", {
+      method: "POST",
+      body: JSON.stringify(userInfo),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Booking Confirmed");
+      });
+  };
 
   if (isLoading) {
     return <Loading></Loading>;
   }
-  const onSubmit = async (data) => {
-    const userInfo = {
-      name: user?.name,
-      email: user?.email,
-      phone: data.phone,
-    };
-    console.log(userInfo);
 
-    // fetch(`http://localhost:5000/booked/${user.email}`, {
-    //   method: "POST",
-    //   body: JSON.stringify(userInfo),
-    //   headers: {
-    //     "Content-type": "application/json; charset=UTF-8",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
-  };
   return (
     <div>
       <h1 class="text-5xl text-center font-bold">Confirm Your Booking now!</h1>
@@ -71,21 +78,10 @@ const ServiceDetails = () => {
                 <input
                   type="text"
                   placeholder="Type here"
-                  defaultValue={user?.displayName}
-                  disabled
+                  // disabled
                   class="input input-bordered w-full max-w-xs"
-                  {...register("name", {
-                    required: {
-                      value: true,
-                      message: "Please enter your name",
-                    },
-                  })}
+                  {...register("name", { value: `${user?.displayName}` })}
                 />
-                <label class="label">
-                  {/* {errors?.name?.type === "required" && (
-                    <span>{errors.name.message}</span>
-                  )} */}
-                </label>
               </div>
               <div class="form-control w-full max-w-xs">
                 <label class="label">
@@ -94,29 +90,11 @@ const ServiceDetails = () => {
                 <input
                   type="text"
                   placeholder="Type here"
-                  defaultValue={user?.email}
-                  disabled
+                  // defaultValue={user?.email}
+                  // disabled
                   class="input input-bordered w-full max-w-xs"
-                  {...register("email", {
-                    required: {
-                      value: true,
-                      message: "please enter your email address",
-                    },
-                    pattern: {
-                      value:
-                        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                      message: "Enter valid email address",
-                    },
-                  })}
+                  {...register("email", { value: `${user?.email}` })}
                 />
-                <label class="label">
-                  {/* {errors?.email?.type === "required" && (
-                    <span class="text-red-700">{errors.email.message}</span>
-                  )}
-                  {errors.email?.type === "pattern" && (
-                    <span class="text-red-700">{errors.email.message}</span>
-                  )} */}
-                </label>
               </div>
               <div class="form-control w-full max-w-xs">
                 <label class="label">
