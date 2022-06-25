@@ -20,6 +20,7 @@ import UpdateService from "./Dashboard/UpdateService";
 import Order from "./Dashboard/Order";
 import ManageOrders from "./Dashboard/ManageOrders";
 import RequireUser from "./Login/RequireUser";
+import Payment from "./Dashboard/Payment";
 function App() {
   return (
     <div class="mx-12">
@@ -53,6 +54,7 @@ function App() {
             element={<EditProfile></EditProfile>}
             Route
           />
+          <Route path="payment/:id" element={<Payment></Payment>} Route />
           <Route
             path="user"
             element={

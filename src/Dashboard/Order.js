@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import auth from "../firebase.init";
 import Loading from "../Shared/Loading";
 
@@ -38,7 +39,9 @@ const Order = () => {
                 <td>{order.serviceName}</td>
                 <td>{order.price}</td>
                 <td>
-                  <button class="btn btn-error btn-xs">Pay</button>
+                  <button class="btn btn-error btn-xs">
+                    <Link to={`/dashboard/payment/${order._id}`}>Pay</Link>
+                  </button>
                 </td>
               </tr>
             ))}
