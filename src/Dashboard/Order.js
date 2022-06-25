@@ -30,6 +30,8 @@ const Order = () => {
               <th>Name</th>
               <th>Price</th>
               <th>Payment</th>
+              <th>Transaction ID</th>
+              <th>Booking Status</th>
             </tr>
           </thead>
           <tbody>
@@ -38,11 +40,23 @@ const Order = () => {
                 <th>{index + 1}</th>
                 <td>{order.serviceName}</td>
                 <td>{order.price}</td>
-                <td>
-                  <button class="btn btn-error btn-xs">
-                    <Link to={`/dashboard/payment/${order._id}`}>Pay</Link>
-                  </button>
-                </td>
+                {!order.payment ? (
+                  <td>
+                    <button class="btn btn-error btn-xs">
+                      <Link to={`/dashboard/payment/${order._id}`}>Pay</Link>
+                    </button>
+                  </td>
+                ) : (
+                  <td class="text-sm text-green-500 font-bold mt-2">
+                    Successful
+                  </td>
+                )}
+                <td class="text-accent font-bold">{order.transactionId}</td>
+                {order.approval ? (
+                  <td class="text-cyan-800 font-bold">Accepted</td>
+                ) : (
+                  <td class="text-orange-800 font-bold">Pending</td>
+                )}
               </tr>
             ))}
           </tbody>

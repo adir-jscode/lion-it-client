@@ -61,6 +61,23 @@ const CheckoutForm = ({ price, payment }) => {
       console.log(paymentIntent);
       setSuccess("Payment is successful");
       setTransitionId(paymentIntent.id);
+      const paymentInfo = {
+        serviceId: payment._id,
+        serviceName: payment.serviceName,
+        transactionId: paymentIntent.id,
+      };
+      const url = `http://localhost:5000/booked/${payment._id}`;
+      fetch(url, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(paymentInfo),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
     }
   };
 
