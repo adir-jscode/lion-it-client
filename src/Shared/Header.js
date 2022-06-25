@@ -1,12 +1,29 @@
 import { signOut } from "firebase/auth";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
+  const [users, setUsers] = useState([]);
+  const [reload, setReload] = useState(false);
+  useEffect(() => {
+    fetch("http://localhost:5000/user", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      });
+  }, [reload]);
   const logout = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
@@ -84,6 +101,15 @@ const Header = () => {
               </li>
               <li>
                 <button onClick={logout}>Logout</button>
+              </li>
+              <li>
+                <Link
+                  to={`edit-profile/${users?.id}`}
+                  className="btn btn-xs mr-36"
+                >
+                  <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
+                  <span className="px-2">Edit Profile</span>
+                </Link>
               </li>
             </ul>
             <div class="dropdown">

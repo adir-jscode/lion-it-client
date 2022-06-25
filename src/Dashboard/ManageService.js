@@ -66,15 +66,14 @@ const ManageService = () => {
                 <td>{manage.name}</td>
                 <td>{manage.price}</td>
                 <td>
-                  <Link to={`/update-service/${manage._id}`}>
-                    <label
-                      for="my-modal"
-                      onClick={() => setUpdate(manage)}
-                      class="btn modal-button btn-primary"
-                    >
-                      Update
-                    </label>
-                  </Link>
+                  <label
+                    for="my-modal"
+                    onClick={() => setUpdate(manage)}
+                    class="btn modal-button btn-primary"
+                  >
+                    Update
+                    {/* <Link to={`/update-service/${manage._id}`}>Update</Link> */}
+                  </label>
                 </td>
                 <td>
                   <label
@@ -90,7 +89,11 @@ const ManageService = () => {
           </tbody>
         </table>
         {update && (
-          <UpdateService manageService={manageService}></UpdateService>
+          <UpdateService
+            loading={loading}
+            setLoading={setLoading}
+            update={update}
+          ></UpdateService>
         )}
         {modalDelete && (
           <DeleteModal

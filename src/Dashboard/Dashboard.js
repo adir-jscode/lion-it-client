@@ -10,7 +10,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "firebase/auth";
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
@@ -20,6 +21,21 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
   const [admin] = UseAdmin(user);
+  const [users, setUsers] = useState([]);
+  const [reload, setReload] = useState(false);
+  useEffect(() => {
+    fetch("http://localhost:5000/user", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0]._id);
+        setUsers(data);
+      });
+  }, [reload]);
   const logout = () => {
     signOut(auth);
     navigate("/");
@@ -51,12 +67,15 @@ const Dashboard = () => {
             )}
 
             <>
-              <button>
-                <Link to="edit-profile" className="btn btn-xs mr-36">
+              {/* <button>
+                <Link
+                  to={`edit-profile/${users[0]?.email}`}
+                  className="btn btn-xs mr-36"
+                >
                   <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
                   <span className="px-2">Edit Profile</span>
                 </Link>
-              </button>
+              </button> */}
             </>
             <h1 class="text-purple-800 font-bold my-2">
               Hi, {user?.displayName}

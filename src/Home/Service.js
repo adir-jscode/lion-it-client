@@ -13,7 +13,7 @@ const Service = ({ service }) => {
           <p>{service.description}</p>
           <div class="card-actions justify-end">
             <button class="btn btn-primary">
-              <Link to={`/service/${service._id}`}>Buy Now</Link>
+              <Link to={`/service/${service._id}`}>Book Now</Link>
             </button>
           </div>
         </div>
