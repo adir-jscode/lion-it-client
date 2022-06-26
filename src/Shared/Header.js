@@ -4,7 +4,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenToSquare,
+  faUser,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,7 +16,7 @@ const Header = () => {
   const [users, setUsers] = useState([]);
   const [reload, setReload] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/user", {
+    fetch(`http://localhost:5000/profile?email=${user?.email}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -96,20 +100,25 @@ const Header = () => {
             >
               <li>
                 <NavLink to="/dashboard/profile" class="justify-between">
+                  {" "}
+                  <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
                   Profile
                 </NavLink>
               </li>
               <li>
-                <button onClick={logout}>Logout</button>
-              </li>
-              <li>
-                <Link
-                  to={`edit-profile/${users?.id}`}
-                  className="btn btn-xs mr-36"
+                <NavLink
+                  to={`edit-profile/${users?._id}`}
+                  className="justify-between"
                 >
                   <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
                   <span className="px-2">Edit Profile</span>
-                </Link>
+                </NavLink>
+              </li>
+              <li>
+                <button onClick={logout}>
+                  <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
+                  Logout
+                </button>
               </li>
             </ul>
             <div class="dropdown">

@@ -29,6 +29,11 @@ function App() {
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route
+          path="edit-profile/:id"
+          element={<EditProfile></EditProfile>}
+          Route
+        />
+        <Route
           path="update-service/:id"
           element={
             <RequireAdmin>
@@ -37,11 +42,7 @@ function App() {
           }
           Route
         />
-        <Route
-          path="edit-profile/:id"
-          element={<EditProfile></EditProfile>}
-          Route
-        />
+
         <Route
           path="/service/:id"
           element={
@@ -63,7 +64,11 @@ function App() {
           }
         >
           <Route index path="profile" element={<Profile></Profile>} Route />
-
+          <Route
+            path="edit-profile/:id"
+            element={<EditProfile></EditProfile>}
+            Route
+          />
           <Route path="payment/:id" element={<Payment></Payment>} Route />
           <Route
             path="user"

@@ -8,21 +8,23 @@ import Loading from "../Shared/Loading";
 const EditProfile = () => {
   const { id } = useParams();
   const [user, loading, error] = useAuthState(auth);
-  // const {
-  //   data: userInformation,
-  //   isLoading,
-  //   refetch,
-  // } = useQuery(["userInformation", email], () =>
-  //   fetch(`http://localhost:5000/user/${email}`).then((response) =>
-  //     response.json()
-  //   )
-  // );
-  // if (isLoading) {
-  //   return <Loading></Loading>;
-  // }
+  const {
+    data: userInformation,
+    isLoading,
+    refetch,
+  } = useQuery(["userInformation", id], () =>
+    fetch(`http://localhost:5000/profile/${id}`).then((response) =>
+      response.json()
+    )
+  );
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div>
       <h1>Edit id {id}</h1>
+      <h1>{userInformation?.email}</h1>
+      <h1>{userInformation?.displayName}</h1>
     </div>
   );
 };
