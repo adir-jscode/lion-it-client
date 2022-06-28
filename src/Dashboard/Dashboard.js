@@ -139,12 +139,7 @@ const Dashboard = () => {
                 </li>
               </>
             )}
-            <li>
-              <Link to="">
-                {" "}
-                <FontAwesomeIcon icon={faMessage}></FontAwesomeIcon>Review
-              </Link>
-            </li>
+
             <li>
               <button onClick={logout}>
                 <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>

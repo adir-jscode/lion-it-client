@@ -32,6 +32,7 @@ const Order = () => {
               <th>Payment</th>
               <th>Transaction ID</th>
               <th>Booking Status</th>
+              <th>Remove</th>
             </tr>
           </thead>
           <tbody>
@@ -57,6 +58,9 @@ const Order = () => {
                 ) : (
                   <td class="text-orange-800 font-bold">Pending</td>
                 )}
+                <td>
+                  <button class="btn btn-sm btn-error">X</button>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -1,8 +1,26 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+import Loading from "../Shared/Loading";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import { useEffect } from "react";
 const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  console.log("update service id", id);
+
+  const {
+    data: service,
+    isLoading,
+    refetch,
+  } = useQuery(["service", id], () =>
+    fetch(`http://localhost:5000/service/${id}`).then((response) =>
+      response.json()
+    )
+  );
+
   const {
     register,
     handleSubmit,
@@ -17,7 +35,7 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
       price: data.price,
     };
 
-    const url = `http://localhost:5000/service/${update._id}`;
+    const url = `http://localhost:5000/service/${id}`;
     fetch(
       url,
       {
@@ -31,66 +49,68 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setLoading(!loading);
-        setUpdate();
-        resetField();
+
+        // toast.success("Updated Successfully");
       });
   };
-  const handleUpdate = (id) => {
-    console.log(id);
+  const handleUpdate = () => {
+    navigate("/dashboard/manage-service");
   };
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div>
-      <input type="checkbox" id="my-modal" class="modal-toggle" />
-      <div class="modal">
-        <div class="modal-box">
-          <label
-            htmlFor="my-modal"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
-          >
-            ✕
-          </label>
-          <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <h1 class="font-bold my-5">
-              Service Name:{" "}
-              <input
-                type="text"
-                placeholder="Type here"
-                defaultValue={update.name}
-                class="input input-bordered w-full max-w-lg"
-                {...register("name")}
-              />
-            </h1>
-            <h1 class="font-bold my-5">
-              Price:{" "}
-              <input
-                type="text"
-                defaultValue={update.price}
-                placeholder="Type here"
-                class="input input-bordered w-full max-w-lg"
-                {...register("price", {
-                  required: {
-                    value: true,
-                    message: "Please provide service price",
-                  },
-                })}
-              />
-            </h1>
-            <div class="form-control mt-6">
-              <input
-                className="btn btn-success w-full max-w-xs text-white"
-                type="submit"
-                value="Update"
-              />
+      <div class="hero min-h-screen bg-base-100">
+        <div class="flex-col lg:flex-row-reverse">
+          <div class="">
+            <h1 class="text-xl font-bold">Service Name: {service?.name}</h1>
+            <h1 class="text-xl font-bold">Price: ${service?.price}</h1>
+            <p class="py-6">{service?.description}</p>
+          </div>
+          <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div class="card-body">
+              <form action="" onSubmit={handleSubmit(onSubmit)}>
+                <h1 class="font-bold my-5">
+                  Service Name:{" "}
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    defaultValue={service?.name}
+                    class="input input-bordered w-full max-w-sm"
+                    {...register("name")}
+                  />
+                </h1>
+                <h1 class="font-bold my-5">
+                  Price:{" "}
+                  <input
+                    type="text"
+                    defaultValue={service?.price}
+                    placeholder="Type here"
+                    class="input input-bordered w-full max-w-sm"
+                    {...register("price", {
+                      required: {
+                        value: true,
+                        message: "Please provide service price",
+                      },
+                    })}
+                  />
+                </h1>
+                <div class="form-control mt-6">
+                  <input
+                    className="btn btn-success w-full max-w-xs text-white"
+                    type="submit"
+                    value="Update"
+                  />
+                </div>
+              </form>
             </div>
-          </form>
-          <h3 class="font-bold text-lg">{update?.name}</h3>
+          </div>
+        </div>
+      </div>
 
-          <h3 class="font-bold text-lg">Price: ${update?.price}</h3>
-
-          <p class="py-4">{update.description}</p>
-          {/* <div class="modal-action">
+      {/* <div class="modal-action">
             <label onClick={() => handleUpdate(update._id)} class="btn">
               Update
             </label>
@@ -98,9 +118,9 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
               Cancel
             </label>
           </div> */}
-        </div>
-      </div>
     </div>
+    //   </div>
+    // </div>
   );
 };
 

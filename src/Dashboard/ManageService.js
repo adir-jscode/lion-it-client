@@ -66,14 +66,21 @@ const ManageService = () => {
                 <td>{manage.name}</td>
                 <td>{manage.price}</td>
                 <td>
-                  <label
-                    for="my-modal"
-                    onClick={() => setUpdate(manage)}
+                  <Link
                     class="btn modal-button btn-primary"
+                    to={`/update-service/${manage._id}`}
                   >
                     Update
-                    {/* <Link to={`/update-service/${manage._id}`}>Update</Link> */}
-                  </label>
+                  </Link>
+
+                  {/* {update && (
+                    <UpdateService
+                      loading={loading}
+                      setLoading={setLoading}
+                      update={update}
+                      setUpdate={setUpdate}
+                    ></UpdateService>
+                  )} */}
                 </td>
                 <td>
                   <label
@@ -96,6 +103,7 @@ const ManageService = () => {
             setUpdate={setUpdate}
           ></UpdateService>
         )}
+
         {modalDelete && (
           <DeleteModal
             modalDelete={modalDelete}
