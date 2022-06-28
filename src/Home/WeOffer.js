@@ -7,7 +7,7 @@ const WeOffer = () => {
       <h1 class="text-center mb-20 mt-5 font-bold text-4xl text-neutral">
         What We Offer
       </h1>
-      <div class="flex">
+      <div class="flex flex-col lg:flex-row">
         <div class="hero-content">
           <div>
             <h1 class="text-5xl font-bold">Work productivity</h1>
@@ -18,9 +18,9 @@ const WeOffer = () => {
             </p>
           </div>
         </div>
-        <div class="hero  right">
+        <div class="hero right">
           <div class="hero-overlay bg-opacity-60"></div>
-          <div class="hero-content  text-white">
+          <div class="hero-content   text-white">
             <div class="max-w-md">
               <h1 class="mb-5 text-4xl font-bold">Every detail matters</h1>
               <p class="mb-5">
