@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-const UpdateService = ({ update, loading, setLoading }) => {
+const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
   const { id } = useParams();
   const {
     register,
     handleSubmit,
     watch,
+    resetField,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
@@ -32,6 +33,8 @@ const UpdateService = ({ update, loading, setLoading }) => {
       .then((data) => {
         console.log(data);
         setLoading(!loading);
+        setUpdate();
+        resetField();
       });
   };
   const handleUpdate = (id) => {
@@ -54,6 +57,7 @@ const UpdateService = ({ update, loading, setLoading }) => {
               <input
                 type="text"
                 placeholder="Type here"
+                defaultValue={update.name}
                 class="input input-bordered w-full max-w-lg"
                 {...register("name")}
               />
@@ -62,6 +66,7 @@ const UpdateService = ({ update, loading, setLoading }) => {
               Price:{" "}
               <input
                 type="text"
+                defaultValue={update.price}
                 placeholder="Type here"
                 class="input input-bordered w-full max-w-lg"
                 {...register("price", {

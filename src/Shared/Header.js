@@ -106,15 +106,6 @@ const Header = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  to={`edit-profile/${users?._id}`}
-                  className="justify-between"
-                >
-                  <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>
-                  <span className="px-2">Edit Profile</span>
-                </NavLink>
-              </li>
-              <li>
                 <button onClick={logout}>
                   <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
                   Logout

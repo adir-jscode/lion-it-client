@@ -93,6 +93,7 @@ const ManageService = () => {
             loading={loading}
             setLoading={setLoading}
             update={update}
+            setUpdate={setUpdate}
           ></UpdateService>
         )}
         {modalDelete && (
