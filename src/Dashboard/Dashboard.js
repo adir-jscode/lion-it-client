@@ -87,13 +87,13 @@ const Dashboard = () => {
                 <FontAwesomeIcon icon={faUser}></FontAwesomeIcon> Profile
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="edit-profile">
                 {" "}
                 <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon>Edit
                 Profile
               </NavLink>
-            </li>
+            </li> */}
             {admin && (
               <li>
                 <Link to="user">
