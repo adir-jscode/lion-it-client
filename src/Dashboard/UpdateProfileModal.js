@@ -23,6 +23,7 @@ const UpdateProfileModal = ({ modal, setModal, reload, setReload, info }) => {
       method: "PUT",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(updatedInfo),
     })

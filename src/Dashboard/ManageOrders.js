@@ -12,7 +12,12 @@ const ManageOrders = () => {
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch("http://localhost:5000/booked").then((response) => response.json())
+    fetch("http://localhost:5000/booked", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((response) => response.json())
   );
 
   if (isLoading) {
@@ -24,6 +29,7 @@ const ManageOrders = () => {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify({ approve: true }),
     })
@@ -36,6 +42,9 @@ const ManageOrders = () => {
     console.log(id);
     fetch(`http://localhost:5000/booked/${id}`, {
       method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((response) => response.json())
       .then((data) => {

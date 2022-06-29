@@ -13,6 +13,7 @@ const UseToken = (user) => {
         body: JSON.stringify(userInformation),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
         .then((response) => response.json())

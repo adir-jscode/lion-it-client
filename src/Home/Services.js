@@ -8,7 +8,12 @@ const Services = () => {
     isLoading,
     refetch,
   } = useQuery("services", () =>
-    fetch("http://localhost:5000/service").then((response) => response.json())
+    fetch("http://localhost:5000/service", {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((response) => response.json())
   );
   if (isLoading) {
     return <Loading></Loading>;

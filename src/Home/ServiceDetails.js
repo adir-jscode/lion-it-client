@@ -16,9 +16,12 @@ const ServiceDetails = () => {
     isLoading,
     refetch,
   } = useQuery(["service", id], () =>
-    fetch(`http://localhost:5000/service/${id}`).then((response) =>
-      response.json()
-    )
+    fetch(`http://localhost:5000/service/${id}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((response) => response.json())
   );
 
   const {
@@ -43,6 +46,7 @@ const ServiceDetails = () => {
       body: JSON.stringify(userInfo),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((response) => response.json())

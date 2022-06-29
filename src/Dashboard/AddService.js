@@ -37,6 +37,7 @@ const AddService = () => {
             body: JSON.stringify(serviceInfo),
             headers: {
               "Content-type": "application/json; charset=UTF-8",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
           })
             .then((response) => response.json())

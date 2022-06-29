@@ -18,7 +18,12 @@ const Payment = () => {
     isLoading,
     refetch,
   } = useQuery(["payment", id], () =>
-    fetch(url).then((response) => response.json())
+    fetch(url, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((response) => response.json())
   );
   if (isLoading) {
     return <Loading></Loading>;

@@ -11,7 +11,12 @@ const ManageService = () => {
   const [modalDelete, setModalDelete] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/service").then((response) =>
+    fetch("http://localhost:5000/service", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer${localStorage.getItem("accessToken")}`,
+      },
+    }).then((response) =>
       response.json().then((data) => setManageService(data))
     );
   }, [loading]);
@@ -20,6 +25,9 @@ const ManageService = () => {
     console.log(id);
     fetch(`http://localhost:5000/service/${id}`, {
       method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((response) => response.json())
       .then((data) => {

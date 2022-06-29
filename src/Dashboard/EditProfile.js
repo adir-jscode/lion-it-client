@@ -13,9 +13,12 @@ const EditProfile = () => {
     isLoading,
     refetch,
   } = useQuery(["userInformation", id], () =>
-    fetch(`http://localhost:5000/profile/${id}`).then((response) =>
-      response.json()
-    )
+    fetch(`http://localhost:5000/profile/${id}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((response) => response.json())
   );
   if (isLoading) {
     return <Loading></Loading>;

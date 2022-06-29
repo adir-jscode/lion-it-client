@@ -16,9 +16,12 @@ const Order = () => {
     isLoading,
     refetch,
   } = useQuery(["order", user.email], () =>
-    fetch(`http://localhost:5000/booked/${user.email}`).then((response) =>
-      response.json()
-    )
+    fetch(`http://localhost:5000/booked/${user.email}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((response) => response.json())
   );
   if (isLoading) {
     return <Loading></Loading>;
@@ -30,6 +33,7 @@ const Order = () => {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((response) => response.json())

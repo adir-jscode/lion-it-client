@@ -20,6 +20,7 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
       method: "GET",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((response) => response.json())
   );
@@ -45,6 +46,7 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(serviceInfo),
       },
