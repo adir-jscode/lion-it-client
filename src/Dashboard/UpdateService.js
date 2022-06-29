@@ -55,6 +55,7 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
+          refetch();
           toast.success("Updated Successfully");
           setLoading(!loading);
         }

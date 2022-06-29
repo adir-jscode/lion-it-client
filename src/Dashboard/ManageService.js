@@ -14,7 +14,7 @@ const ManageService = () => {
     fetch("http://localhost:5000/service", {
       method: "GET",
       headers: {
-        authorization: `Bearer${localStorage.getItem("accessToken")}`,
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((response) =>
       response.json().then((data) => setManageService(data))
