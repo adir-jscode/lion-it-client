@@ -16,9 +16,12 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
     isLoading,
     refetch,
   } = useQuery(["service", id], () =>
-    fetch(`http://localhost:5000/service/${id}`).then((response) =>
-      response.json()
-    )
+    fetch(`http://localhost:5000/service/${id}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((response) => response.json())
   );
 
   const {
@@ -49,9 +52,10 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        setLoading(!loading);
-
-        // toast.success("Updated Successfully");
+        if (data.modifiedCount > 0) {
+          toast.success("Updated Successfully");
+          setLoading(!loading);
+        }
       });
   };
   const handleUpdate = () => {

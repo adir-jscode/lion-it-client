@@ -98,7 +98,7 @@ const Dashboard = () => {
               <li>
                 <Link to="user">
                   {" "}
-                  <FontAwesomeIcon icon={faUsers}></FontAwesomeIcon>Users{" "}
+                  <FontAwesomeIcon icon={faUsers}></FontAwesomeIcon>Admins{" "}
                 </Link>
               </li>
             )}

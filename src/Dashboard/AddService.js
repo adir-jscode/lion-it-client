@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import "./AddService.css";
 
 const AddService = () => {
   const {
@@ -129,6 +130,7 @@ const AddService = () => {
           type="file"
           name=""
           id=""
+          class="btn btn-secondary"
           {...register("image", {
             required: {
               value: true,

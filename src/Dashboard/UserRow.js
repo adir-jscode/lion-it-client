@@ -53,14 +53,14 @@ const UserRow = ({ user, index, setReload, reload }) => {
         {user.role === "admin" ? (
           <span class="text-green-700 font-bold">Admin</span>
         ) : (
-          <button onClick={makeAdmin} class="btn btn-sm">
+          <button onClick={makeAdmin} class="btn btn-sm btn-warning">
             Make Admin
           </button>
         )}
       </td>
       <td>
         {user.role === "admin" && (
-          <button onClick={removeAdmin} class="btn btn-circle">
+          <button onClick={removeAdmin} class="btn btn-circle btn-error">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"

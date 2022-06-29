@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../firebase.init";
 import Loading from "../Shared/Loading";
+import OrderDeleteModal from "./OrderDeleteModal";
 
 const Order = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [openModal, setOpenModal] = useState(false);
+  const [reload, setReload] = useState(false);
   const {
     data: order,
     isLoading,
@@ -19,6 +23,24 @@ const Order = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
+
+  const handleRemoveOrder = (id) => {
+    console.log("remove order", id);
+    fetch(`http://localhost:5000/purchase/${id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Order removed");
+          setOpenModal(false);
+          refetch();
+        }
+      });
+  };
   return (
     <div>
       <h1 class="font-bold my-5">My orders: {order.length}</h1>
@@ -43,7 +65,7 @@ const Order = () => {
                 <td>{order.price}</td>
                 {!order.payment ? (
                   <td>
-                    <button class="btn btn-error btn-xs">
+                    <button class="btn btn-accent btn-xs">
                       <Link to={`/dashboard/payment/${order._id}`}>Pay</Link>
                     </button>
                   </td>
@@ -59,12 +81,25 @@ const Order = () => {
                   <td class="text-orange-800 font-bold">Pending</td>
                 )}
                 <td>
-                  <button class="btn btn-sm btn-error">X</button>
+                  <button onClick={() => setOpenModal(order)}>
+                    <label
+                      for="my-modal-3"
+                      class="btn modal-button btn-sm btn-error btn-sm btn-error"
+                    >
+                      X
+                    </label>
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        {openModal && (
+          <OrderDeleteModal
+            handleRemoveOrder={handleRemoveOrder}
+            openModal={openModal}
+          ></OrderDeleteModal>
+        )}
       </div>
     </div>
   );

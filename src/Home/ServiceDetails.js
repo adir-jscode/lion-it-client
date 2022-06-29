@@ -130,9 +130,11 @@ const ServiceDetails = () => {
         </div>
       </div>
       <div class="w-11/12 flex justify-center">
-        <button class=" btn btn-wide btn-secondary text-black font-bold my-10">
-          <Link to="/dashboard/my-order">Go To Checkout</Link>
-        </button>
+        <Link to="/dashboard/my-order">
+          <button class=" btn btn-wide btn-secondary text-black font-bold my-10">
+            Go To Checkout
+          </button>
+        </Link>
       </div>
     </div>
   );

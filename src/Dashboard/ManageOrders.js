@@ -3,8 +3,10 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import Loading from "../Shared/Loading";
 import { toast } from "react-toastify";
+import OrderDeleteAdminModal from "./OrderDeleteAdminModal";
 
 const ManageOrders = () => {
+  const [openModal, setOpenModal] = useState(false);
   const {
     data: orders,
     isLoading,
@@ -37,9 +39,10 @@ const ManageOrders = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert("Are you sure you want to delete?");
-        if (data.modifiedCount > 0) {
+        if (data.deletedCount > 0) {
+          setOpenModal(false);
           toast.success("Deleted");
+
           refetch();
         }
       });
@@ -96,17 +99,25 @@ const ManageOrders = () => {
                 )}
 
                 <td>
-                  <button
-                    onClick={() => handleDeleteOrder(order._id)}
-                    class="btn btn-sm"
-                  >
-                    X
+                  <button onClick={() => setOpenModal(order)} class="">
+                    <label
+                      for="my-modal-3"
+                      class="btn btn-sm btn-error modal-button"
+                    >
+                      X
+                    </label>
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        {openModal && (
+          <OrderDeleteAdminModal
+            openModal={openModal}
+            handleDeleteOrder={handleDeleteOrder}
+          ></OrderDeleteAdminModal>
+        )}
       </div>
     </div>
   );

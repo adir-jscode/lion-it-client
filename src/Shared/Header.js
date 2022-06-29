@@ -4,9 +4,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import lion from "../assets/images/lion.png";
 import {
   faPenToSquare,
+  faHouse,
+  faDashboard,
   faUser,
+  faRightToBracket,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -36,15 +40,22 @@ const Header = () => {
   const menu = (
     <>
       <li>
-        <NavLink to="/home">Home</NavLink>
+        <NavLink to="/home">
+          <FontAwesomeIcon icon={faHouse}></FontAwesomeIcon>Home
+        </NavLink>
       </li>
       {user ? (
         <li>
-          <NavLink to="/dashboard/profile">Dashboard</NavLink>
+          <NavLink to="/dashboard/profile">
+            <FontAwesomeIcon icon={faDashboard}></FontAwesomeIcon>Dashboard
+          </NavLink>
         </li>
       ) : (
         <li>
-          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/login">
+            {" "}
+            <FontAwesomeIcon icon={faRightToBracket}></FontAwesomeIcon>Login
+          </NavLink>
         </li>
       )}
     </>
@@ -77,7 +88,10 @@ const Header = () => {
               {menu}
             </ul>
           </div>
-          <a class="btn btn-ghost normal-case text-xl">LION IT</a>
+          <Link to="/" class="btn btn-ghost normal-case text-xl">
+            <img style={{ width: "40px" }} src={lion} alt="" />
+            LION IT
+          </Link>
         </div>
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal p-0">{menu}</ul>
