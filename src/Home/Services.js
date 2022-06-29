@@ -8,7 +8,7 @@ const Services = () => {
     isLoading,
     refetch,
   } = useQuery("services", () =>
-    fetch("http://localhost:5000/service", {
+    fetch("https://intense-plateau-54634.herokuapp.com/service", {
       method: "GET",
       headers: {
         "content-type": "application/json",

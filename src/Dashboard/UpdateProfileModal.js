@@ -19,7 +19,7 @@ const UpdateProfileModal = ({ modal, setModal, reload, setReload, info }) => {
       phone: data.phone,
       location: data.location,
     };
-    fetch(`http://localhost:5000/user?email=${email}`, {
+    fetch(`https://intense-plateau-54634.herokuapp.com/user?email=${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

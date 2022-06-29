@@ -16,7 +16,7 @@ const Order = () => {
     isLoading,
     refetch,
   } = useQuery(["order", user.email], () =>
-    fetch(`http://localhost:5000/booked/${user.email}`, {
+    fetch(`https://intense-plateau-54634.herokuapp.com/booked/${user.email}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -29,7 +29,7 @@ const Order = () => {
 
   const handleRemoveOrder = (id) => {
     console.log("remove order", id);
-    fetch(`http://localhost:5000/purchase/${id}`, {
+    fetch(`https://intense-plateau-54634.herokuapp.com/purchase/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

@@ -13,7 +13,7 @@ const EditProfile = () => {
     isLoading,
     refetch,
   } = useQuery(["userInformation", id], () =>
-    fetch(`http://localhost:5000/profile/${id}`, {
+    fetch(`https://intense-plateau-54634.herokuapp.com/profile/${id}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

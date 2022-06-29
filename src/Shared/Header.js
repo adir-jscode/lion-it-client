@@ -20,12 +20,15 @@ const Header = () => {
   const [users, setUsers] = useState([]);
   const [reload, setReload] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/profile?email=${user?.email}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://intense-plateau-54634.herokuapp.com/profile?email=${user?.email}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

@@ -16,7 +16,7 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
     isLoading,
     refetch,
   } = useQuery(["service", id], () =>
-    fetch(`http://localhost:5000/service/${id}`, {
+    fetch(`https://intense-plateau-54634.herokuapp.com/service/${id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -39,7 +39,7 @@ const UpdateService = ({ update, loading, setLoading, setUpdate }) => {
       price: data.price,
     };
 
-    const url = `http://localhost:5000/service/${id}`;
+    const url = `https://intense-plateau-54634.herokuapp.com/service/${id}`;
     fetch(
       url,
       {

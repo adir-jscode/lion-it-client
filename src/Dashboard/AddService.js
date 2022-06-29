@@ -32,7 +32,7 @@ const AddService = () => {
             image: img,
           };
 
-          fetch("http://localhost:5000/service", {
+          fetch("https://intense-plateau-54634.herokuapp.com/service", {
             method: "POST",
             body: JSON.stringify(serviceInfo),
             headers: {

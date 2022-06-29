@@ -16,7 +16,7 @@ const ServiceDetails = () => {
     isLoading,
     refetch,
   } = useQuery(["service", id], () =>
-    fetch(`http://localhost:5000/service/${id}`, {
+    fetch(`https://intense-plateau-54634.herokuapp.com/service/${id}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -41,7 +41,7 @@ const ServiceDetails = () => {
       price: service.price,
     };
     console.log(userInfo);
-    fetch("http://localhost:5000/booked", {
+    fetch("https://intense-plateau-54634.herokuapp.com/booked", {
       method: "POST",
       body: JSON.stringify(userInfo),
       headers: {

@@ -12,7 +12,7 @@ const ManageOrders = () => {
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch("http://localhost:5000/booked", {
+    fetch("https://intense-plateau-54634.herokuapp.com/booked", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -24,7 +24,7 @@ const ManageOrders = () => {
     return <Loading></Loading>;
   }
   const handleApproval = (id) => {
-    const url = `http://localhost:5000/approval/${id}`;
+    const url = `https://intense-plateau-54634.herokuapp.com/approval/${id}`;
     fetch(url, {
       method: "PATCH",
       headers: {
@@ -40,7 +40,7 @@ const ManageOrders = () => {
   };
   const handleDeleteOrder = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/booked/${id}`, {
+    fetch(`https://intense-plateau-54634.herokuapp.com/booked/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

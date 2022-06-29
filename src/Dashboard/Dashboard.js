@@ -24,7 +24,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [reload, setReload] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/user", {
+    fetch("https://intense-plateau-54634.herokuapp.com/user", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

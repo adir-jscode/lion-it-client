@@ -3,12 +3,15 @@ import { toast } from "react-toastify";
 
 const UserRow = ({ user, index, setReload, reload }) => {
   const makeAdmin = () => {
-    fetch(`http://localhost:5000/user/admin/${user.email}`, {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://intense-plateau-54634.herokuapp.com/user/admin/${user.email}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((response) => {
         if (response.status === 403) {
           toast.error("Failed to make an admin");
@@ -24,12 +27,15 @@ const UserRow = ({ user, index, setReload, reload }) => {
       });
   };
   const removeAdmin = () => {
-    fetch(`http://localhost:5000/user/customer/${user.email}`, {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://intense-plateau-54634.herokuapp.com/user/customer/${user.email}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((response) => {
         if (response.status === 403) {
           toast.error("Failed to remove");

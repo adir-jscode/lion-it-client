@@ -17,7 +17,7 @@ const CheckoutForm = ({ price, payment }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://intense-plateau-54634.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -66,7 +66,7 @@ const CheckoutForm = ({ price, payment }) => {
         serviceName: payment.serviceName,
         transactionId: paymentIntent.id,
       };
-      const url = `http://localhost:5000/booked/${payment._id}`;
+      const url = `https://intense-plateau-54634.herokuapp.com/booked/${payment._id}`;
       fetch(url, {
         method: "PATCH",
         headers: {

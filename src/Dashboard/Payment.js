@@ -11,7 +11,7 @@ const stripePromise = loadStripe(
 );
 const Payment = () => {
   const { id } = useParams();
-  const url = `http://localhost:5000/payment/${id}`;
+  const url = `https://intense-plateau-54634.herokuapp.com/payment/${id}`;
 
   const {
     data: payment,

@@ -11,7 +11,7 @@ const ManageService = () => {
   const [modalDelete, setModalDelete] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/service", {
+    fetch("https://intense-plateau-54634.herokuapp.com/service", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -23,7 +23,7 @@ const ManageService = () => {
 
   const handleDelete = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/service/${id}`, {
+    fetch(`https://intense-plateau-54634.herokuapp.com/service/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
